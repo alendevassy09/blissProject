@@ -73,17 +73,11 @@ module.exports={
     get_wishlist:(id)=>{
         return new Promise(async(resolve,reject)=>{
             try {
-                // const wish =
+                
                  await wishlist.findOne({user_id:objectId(id)}).populate('list.product').lean().then((wish)=>{
-                    console.log('------wish------');
-                    console.log(wish);
                     resolve(wish)
                  })
-                // if (wish) {
-                   
-                // }else{
-                //     resolve()
-                // }
+                
                 
             } catch (error) {
                 reject(error)

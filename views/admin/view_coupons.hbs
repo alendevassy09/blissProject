@@ -1,0 +1,224 @@
+
+<div class="container" onload="fun()">
+    <div class="row justify-content-center">
+        <div class="col-12 mt-2">
+            {{!-- <a role="button" href="/admin/add_category" class="btn btn-success">add category</a> --}}
+            <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Coupon</a>
+                    {{!-- add category modal --}}
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    
+                    <form action="/admin/add_coupon" method="post" id="coupon">
+                         <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Enter Coupon Name</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        
+                        <div class="modal-body">
+                            <input
+                                    
+                                    type="text"
+                                    name="coupon"
+                                    class="form-control w-75 "
+                                    id="coupon"
+                                    aria-describedby="emailHelp"
+                                    placeholder="coupon Description"
+                                />
+
+                                <input
+                                    
+                                    type="text"
+                                    name="couponCode"
+                                    class="form-control w-75 mt-1"
+                                    id="couponCode"
+                                    aria-describedby="emailHelp"
+                                    placeholder="coupon Code"
+                                />
+                                <input
+                                    
+                                    type="number"
+                                    min="1"
+                                    name="discount"
+                                    class="form-control w-75 mt-1"
+                                    id="discount"
+                                    aria-describedby="emailHelp"
+                                    placeholder="discount%"
+                                />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" href="" class="btn btn-primary">Save </button>
+                        </div>
+                        </div>
+                    </div>
+                    </form>
+
+                   
+                </div>
+
+
+                    
+        </div>
+        <div class="col-12 col-md-10 mt-2">
+            <table class="table table-striped shadow p-3 mb-5 bg-body rounded" id="product_table"> 
+            <thead>
+                <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Coupon</th>
+                <th scope="col">Code</th>
+                <th scope="col">Discount</th>
+                <th scope="col">Action</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                {{#each coupons}}
+                <tr>
+                <td>{{format this.createdAt}}</td>
+                <td>{{this.coupon}}</td>
+                <td>{{this.couponCode}}</td>
+                <td>{{this.discount}}%</td>
+                <td>
+                                   <!-- Button trigger modal -->
+                    <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{this._id}}">
+                    <i class="bi bi-pencil-fill"></i>
+                    </a>
+                    {{!-- <a href="/admin/edit_category_name/{{this._id}}" class="btn btn-info" role="button">edit</a> --}}
+                    {{!-- <a href="/admin/delete/{{this._id}}" class="btn btn-danger" role="button">delete</a> --}}
+                    
+                    <a style="width: %;" type="button"  class="btn btn-danger "  data-bs-toggle="modal" data-bs-target="#staticBackdrop{{this._id}}"><i class="bi bi-trash3-fill"></i></a>
+                </td>
+                </tr>
+
+
+
+{{!-- category edit modal --}}
+
+
+<!-- Modal -->
+                    <div class="modal fade" id="exampleModal{{this._id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    
+                    <form action="/admin/edit_coupon/{{this._id}}" method="post" id="coupon" >
+                         <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Edit Coupon</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        
+                        <div class="modal-body">
+                            <input
+                                    required
+                                    type="text"
+                                    value="{{this.coupon}}"
+                                    name="coupon"
+                                    class="form-control w-75"
+                                    id="coupon"
+                                    aria-describedby="emailHelp"
+                                    placeholder="coupon Description"
+                                />
+                                <input
+                                    required
+                                    type="text"
+                                    value="{{this.couponCode}}"
+                                    name="couponCode"
+                                    class="form-control w-75 mt-1"
+                                    id="couponCode"
+                                    aria-describedby="emailHelp"
+                                    placeholder="coupon code"
+                                />
+
+                                 <input
+                                    required
+                                    type="text"
+                                    value="{{this.discount}}"
+                                    name="discount"
+                                    class="form-control w-75 mt-1"
+                                    id="discount"
+                                    aria-describedby="emailHelp"
+                                    placeholder="discount"
+                                />
+                                
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" href="" class="btn btn-primary">Save changes</button>
+                        </div>
+                        </div>
+                    </div>
+                    </form>
+
+ 
+                    
+                    
+
+                   
+                    </div>
+{{!-- category delete modal --}}
+                <div class="modal fade" id="staticBackdrop{{this._id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">confirm</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    Are you sure about deleting '{{this.coupon}}'
+                  </div>
+                  <div class="modal-footer">
+                    <a type="button" href="/admin/categories" class="btn btn-secondary" data-bs-dismiss="modal">no</a>
+                    
+                    <a  role="button" href="/admin/delete_coupon/{{this._id}}" class="btn btn-primary">yes</a>
+                  
+                  </div>
+                </div>
+              </div>
+            </div>
+
+               {{/each}}
+          
+            </tbody>
+            
+            
+            </table>
+        </div>
+    </div>
+</div>
+
+  <script>
+      $(document).ready( function () {
+        $('#product_table').DataTable();
+    } );
+    $(document).ready(function(){ $("#coupon").validate(
+    { rules:
+            { 
+                coupon: {
+                required: true,
+                
+                 },
+                 couponCode:{
+                  required:true,
+                  lettersonly:true,
+                  noSpace:true
+                 },
+                 discount:{
+                  required:true,
+                  number:true,
+                  noSpace:true
+
+                 }
+            } ,
+            messages:{
+              coupon:'enter coupon name',
+              couponCode:'enter coupon code',
+              discount:'enter coupon discount'
+            }
+            })
+      })
+</script>
+<style>
+  .error{
+    color: red;
+  }
+</style>

@@ -1,0 +1,87 @@
+
+
+
+
+	<!-- Start Banner Area -->
+
+	<!-- End Banner Area -->
+
+	<!--================Login Box Area =================-->
+	<section class="login_box_area section_gap">
+		<div class="container pt-4">
+			<div class="row justify-content-center">
+
+
+				<div class="col-lg-4">
+					<div class="login_form_inner">
+						<form action="/forgot_verification" method="post" id="otpform">
+                        {{!-- <!-- Email input -->
+                        <div class="form-outline mb-4">
+                            <input type="email" id="form2Example1" class="form-control" />
+                            <label class="form-label" for="form2Example1">Email address</label>
+                        </div> --}}
+
+                        <!-- Password input -->
+                        <div class="form-outline ">
+                            <label class="form-label" for="form2Example2">enter the 6 didgit OTP</label>
+                            <input type="text" name="phone" value="{{phone}}" id="form2Example2" class="form-control w-50 mx-auto" hidden/>
+                            <input type="text" name="otp" id="form2Example2" class="form-control w-50 mx-auto" />
+                            
+                        </div>
+
+                        <!-- 2 column grid layout for inline styling -->
+                        <div class="row mb-4">
+                            <div class="col d-flex justify-content-center">
+                            <!-- Checkbox -->
+                            
+                            </div>
+
+                            <div class="col">
+                            <!-- Simple link -->
+                            <a href="#!">resend OTP</a>
+                            </div>
+                        </div>
+
+                        <!-- Submit button -->
+                        <button type="submit"  class="btn primary-btn mb-4">verify</button>
+
+                        <!-- Register buttons -->
+                       
+                        </form>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--================End Login Box Area =================-->
+
+	<!-- start footer Area -->
+<script>
+    $(document).ready(function(){
+  		$("#otpform").validate({
+    rules:{
+
+
+				
+		
+			 otp:{
+				 required: true,
+				number: true,
+				minlength: 6,
+				maxlength: 6
+			 },
+          
+             
+			}
+		})
+		})
+</script>
+
+
+
+
+
+
+
+

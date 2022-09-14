@@ -1,0 +1,41 @@
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-10 mt-4">
+            <table class="table table-striped shadow p-3 mb-5 bg-body rounded" id="product_table">
+            <thead>
+                <tr>
+                <th scope="col">photo</th>
+                <th scope="col">product name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Size</th>
+                <th scope="col">Color</th>
+                <th scope="col">QTY</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                {{#each orders.products}}
+                <tr>
+                <td style="width: 6%;"><img width="70%" class="img-fluid" src="/{{this.product.pic.[0]}}"  alt=""></td>
+                <td>{{this.product.product_name}}</td>
+                <td>{{this.product.offerprice}}</td>
+                <td>{{this.size}}</td>
+                <td>{{this.color}}</td>
+                <td>{{this.quantity}}</td>
+                </tr>
+
+               {{/each}}
+          
+            </tbody>
+            
+            
+            </table>
+        </div>
+    </div>
+</div>
+  <script>
+      $(document).ready( function () {
+        $('#product_table').DataTable();
+    } );
+</script>

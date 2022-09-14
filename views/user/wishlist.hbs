@@ -1,0 +1,81 @@
+<section class="mt-5 ">
+			<div class="container mt-5">
+				
+                <div class="row justify-content-center mt-5">
+					<div class="col-lg-6 text-center">
+						<div class="section-title">
+							
+							
+						</div>
+					</div>
+				</div>
+                <div class="row justify-content-center mt-5">
+					<div class="col-lg-6 text-center">
+						<div class="section-title">
+							{{#if empty}}
+							<img width="50%" src="images/heart.png" alt="">
+							<h1>Your Wishlist is Empty</h1>
+							{{/if}}
+							{{#unless empty}}
+							<h1>Your Wishlist</h1>
+							
+							{{/unless}}
+							
+						</div>
+					</div>
+				</div>
+				<div class="row mt-3">
+					<!-- single product -->
+					{{#each products.list}}
+						<div class="col-lg-3 col-md-6 shadow p-3 mb-5 bg-white rounded mx-1 hover" >
+							<a href="/single_product_details/{{this.product._id}}">
+						<div class="single-product " >
+							<img class="img-fluid " src="/{{this.product.pic.[0]}}" alt="">
+							<div class="product-details ">
+								{{!-- <h6>{{this.product.product_name}} </h6> --}}
+								<div class="price">
+									<h6>{{this.product.product_name}} </h6>
+									<div>
+										<h6>₹{{this.product.offerprice}}</h6>
+									<h6 class="l-through">₹ {{this.product.price}}</h6>
+									</div>
+								</div>
+								<div class="prd-bottom position-absolute">
+
+									<a  onclick="addtocartwish('{{this.product._id}}')"  class="social-info">
+										<span class="ti-bag"></span>
+										<p class="hover-text">add to bag</p>
+									</a>
+		
+                                    <a  onclick="wishlist_remove('{{this.product._id}}');  return false;" class="social-info">
+										<span class="">X</span>
+										<p class="hover-text">Remove</p>
+									</a>
+								</div>
+							</div>
+						</div>
+						</a>
+					</div>
+					<div class="product_count" hidden>
+							<label for="qty">Quantity:</label>
+							<input type="text" name="qty" id="sst" min="1" maxlength="12" value="1" title="Quantity:" class="input-text qty">
+							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+							 class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
+							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 1 ) result.value--;return false;"
+							 class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
+						</div>
+					<input type="text"  id="color" hidden value="{{this.product.color.[0]}}">
+					<input type="text"  id="size" hidden value="{{this.product.size.[0]}}">
+					{{/each}}
+				</div>
+			</div>
+		</section>
+		<style>
+								.hover:hover{
+									transition: 300ms;
+									transform: scale(1.02);
+								}
+							</style>
+
+        
+	

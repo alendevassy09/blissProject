@@ -1,0 +1,578 @@
+<div class="container mt-5 ">
+    <div class="row ">
+    {{!-- action="/checkout/{{products.user_id}}"  --}}
+        {{!--  method="post"   --}}
+                <form class="row contact_form"  id="checkout" method="post">
+                <input type="text" id="product_id"  value="{{products.user_id}}" hidden>
+                    <div class="col-lg-8 ">
+                        <h3>Billing Details</h3>
+                        <div class="row">
+                            <div class="col">
+                                 <a role="button"  class="btn btn-dark btn-sm text-white" data-toggle="modal" data-target="#addressModalCenter">Choose address</a>
+                                 <div class="modal fade" id="addressModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Select a Address</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    {{!-- ------ --}}
+                                    <div class="row mt-2">
+                                {{#each add_list}}
+                                
+
+                                    <div class="col-12 mt-2">
+                                        <a style="cursor: pointer;" onclick="select_add('{{this._id}}'); return false;">
+                                <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h4 class="card-title">{{this.name}}</h4>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <h6 class="card-text" >Home/company</h6>
+                                            <h6 class="card-text" >Locality</h6>
+                                            <h6 class="card-text" >Town</h6>
+                                            <h6 class="card-text" >District</h6>
+                                            <h6 class="card-text" >Pincode</h6>
+                                        </div>
+                                        <div class="col-6">
+                                            <h6 class="card-text" >:{{this.add1}}</h6>
+                                            <h6 class="card-text" >:{{this.locality}}</h6>
+                                            <h6 class="card-text" >:{{this.town}}</h6>
+                                            <h6 class="card-text" >:{{this.district}}</h6>
+                                            <h6 class="card-text" >:{{this.pincode}}</h6>
+
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    
+                                    
+                                <div class="col-12">
+                                    {{!-- <a href="#" class="btn btn-warning btn-sm"><span class="material-symbols-outlined">
+                                            edit
+                                            </span></a> --}}
+                                </div>
+                                </div>
+                                </div>
+                                </a>
+                            </div>
+
+                                
+                            
+                            {{/each}}
+                            </div>
+                                    {{!-- ------ --}}
+                                </div>
+                                <div class="modal-footer">
+                                    
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            
+                               
+                                {{!-- <span class="placeholder" placeholder="First name"></span> --}}
+                            
+                            <div class="col-md-6 form-group p_star">
+                                <input type="text" class="form-control" value="{{address.fname}}" style="color: black;" placeholder="first name" id="first" name="fname">
+                                {{!-- <span class="placeholder" placeholder="First name"></span> --}}
+                            </div>
+                            <div class="col-md-6 form-group p_star">
+                                <input type="text" class="form-control" value="{{address.lname}}" style="color: black;" placeholder="last name" id="last" name="lname">
+                                {{!-- <span class="placeholder" data-placeholder="Last name"></span> --}}
+                            </div>
+                           
+                            <div class="col-md-6 form-group p_star">
+                                <input type="text" class="form-control" value="{{address.number}}" style="color: black;" placeholder="phone number" id="number" name="number">
+                                {{!-- <span class="placeholder" data-placeholder="Phone number"></span> --}}
+                            </div>
+                            <div class="col-md-6 form-group p_star">
+                                <input type="text" class="form-control" value="{{address.email}}" style="color: black;" id="email" placeholder="email" name="email">
+                                {{!-- <span class="placeholder" data-placeholder="Email Address"></span> --}}
+                            </div>
+                            
+                            <div class="col-md-12 form-group p_star">
+                                <input type="text" class="form-control" value="{{address.add1}}" style="color: black;" id="add1" placeholder="add1" name="add1">
+                                {{!-- <span class="placeholder" data-placeholder="Address line 01"></span> --}}
+                            </div>
+                            <div class="col-md-12 form-group p_star">
+                                <input type="text" class="form-control" value="{{address.locality}}" style="color: black;" id="add2" placeholder="locality" name="locality">
+                                {{!-- <span class="placeholder" data-placeholder="Address line 02"></span> --}}
+                            </div>
+                            <div class="col-md-12 form-group p_star">
+                                <input type="text" class="form-control" value="{{address.town}}" style="color: black;" id="city" placeholder="town" name="town">
+                                {{!-- <span class="placeholder" data-placeholder="Town/City"></span> --}}
+                            </div>
+                            <div class="col-md-12 form-group p_star">
+                                <input type="text" class="form-control" id="total" hidden  value="{{products.totalprice}}" placeholder="district"  name="total">
+                                <input type="text" class="form-control" id="couponid" hidden  value="{{products.coupon._id}}" placeholder="district" name="coupon_id">
+                                <input type="text" class="form-control" id="status" hidden value="pending" placeholder="district" name="status">
+                                <input type="text" class="form-control" value="{{address.district}}" style="color: black;" id="district" placeholder="district" name="district">
+                                {{!-- <span class="placeholder" data-placeholder="Disctict"></span> --}}
+                            </div>
+                            
+                            <div class="col-md-12 form-group">
+                                <input type="text" class="form-control" id="zip" value="{{address.zip}}" style="color: black;" name="zip" placeholder="Postcode/ZIP">
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        
+                        <div class="order_box">
+                            
+                            <h2>Your Order</h2>
+                            <ul class="list">
+                                <li><a href="#">Product <span>Total</span></a></li>
+                                {{#each products.carts}}
+                                <li><a href="#">{{this.product.product_name}} <span class="middle">x {{this.quantity}}</span> <span class="last">{{this.product.offerprice}}</span></a></li>
+                                {{/each}}
+                                
+                            </ul>
+                           
+                           
+                            <ul class="list list_2">
+                                <div class="row mt-3" >
+                                    <div class="col-5 pb-2">
+                                        <div class="d-flex justify-content-between">
+
+                                        <span style="color: red;" class="material-icons mt-2">
+                                        card_giftcard
+                                        </span>
+                                     <p class="mt-2" style="color: black;">Use Gift Card</p>
+                                     </div>
+                                    </div>
+                                    <div class="col-6">
+                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">
+                                Apply
+                                </button>
+                                
+                                    </div>
+                              
+                                    
+                                </div>
+                                 
+                                    <input type="text" hidden id="price" value="{{products.totalprice}}">
+                                <li><a href="#">Total<span id="use">₹{{products.totalprice}}</span></a></li>
+                            <p id="coupon_activate" style="color: green;"></p>
+
+                            </ul>
+                            <div id="method">
+
+                            
+                            <div class="payment_item">
+                                <div class="radion_btn">
+                                    <input type="radio" name="method" id="f-option5" value="COD">
+                                    <label for="f-option5">Cash on Delivery</label>
+                                    <div class="check"></div>
+                                </div>
+                                {{!-- <p>Please send a check to Store Name, Store Street, Store Town, Store State / County,
+                                    Store Postcode.</p> --}}
+                            </div>
+                            <div class="payment_item active">
+                                <div class="radion_btn">
+                                    <input type="radio" checked name="method" id="f-option6" value="online">
+                                    <label for="f-option6">Pay Now</label>
+                                    <img src="img/product/card.jpg" alt="">
+                                    <div class="check"></div>
+                                </div>
+                                {{!-- <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal
+                                    account.</p> --}}
+                            </div>
+                            </div>
+                            {{!-- <div class="creat_account">
+                                <input type="checkbox" id="f-option4" name="selector">
+                                <label for="f-option4">I’ve read and accept the </label>
+                                <a href="#">terms & conditions*</a>
+                            </div> --}}
+
+<!-- Modal -->
+
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h6 class="modal-title" id="exampleModalLabel">Notice:You can only use one Gift Card for each purchase</h6>
+                                <button type="button" id="closemodal" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body justify-content-center">
+                                
+                                <div class="input-group w-50 mb-3">
+                        <input type="text" class="form-control" id="cupid" placeholder="Coupon Code" >
+                        <div class="input-group-append">
+                            <button class="btn btn-warning" onclick="use_coupon()" type="button">Apply</button>
+                        </div>
+                        
+                        </div>
+                            
+                                <div class="row justify-content-center">
+                                    {{#each products.coupon}}
+                                    <div class="col-12 border-bottom  justify-content-center mt-2">
+                                        {{!-- <img  src="images/voucher.png" class="w-75 img-fluid" alt=""> --}}
+                                        <input type="text" hidden disabled value="{{this._id}}" name="" id="">
+                                        <h3>{{this.coupon}}<span class="material-symbols-outlined">
+                                                    loyalty
+                                                    </span></h3>
+                                        <h5>{{this.discount}}% off</h5>
+                                        <h5>
+                                            <div class="input-group input-group-sm mb-3" style="width: 30%;">
+                                                <input type="text" class="form-control" id="{{this._id}}" disabled  value="{{this.couponCode}}"  aria-describedby="inputGroup-sizing-sm">
+                                            <div class="input-group-prepend">
+                                                <a class="input-group-text" onclick="coupon('{{this._id}}'); return false;" style="cursor: pointer;" id="inputGroup-sizing-sm"><span class="material-symbols-outlined">
+                                                copy_all
+                                                </span></a>
+                                            </div>
+                                            
+                                            </div>
+
+                                        </h5>
+                                        
+                                        
+                                        <input type="text" id="discount{{this._id}}" value="{{this.discount}}" hidden>
+                                        
+                                    </div>
+
+                                    <div class="col-4">
+                                        {{!-- <button onclick="use_coupon('{{this._id}}')" type="button" class="btn primary-btn align-middle">Use Now</button> --}}
+                                    </div>
+                                    {{/each}}
+                                    
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                {{!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button> --}}
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+
+
+
+
+
+                            <button type="submit" class="primary-btn">Proceed</button>
+                        </div>
+                    </div>
+                </form>
+                </div>
+             
+</div>
+<script>
+$(document).ready(function(){
+$.validator.messages.lettersonly = 'only letters and spaces are not allowed';
+  jQuery.validator.addMethod("noSpace", function(value, element) { 
+  return value.indexOf(" ") < 0 && value != ""; 
+}, "No space please and don't leave it empty");
+
+  		$("#checkout").validate({
+    rules:{
+
+		     email: { 
+                required: true,
+                email: true 
+			 },
+             fname:{
+                lettersonly:true,
+                noSpace:true
+                
+             },
+             lname:{
+                lettersonly:true,
+                noSpace:true
+                
+             },
+            
+             add1:{
+                required:true,
+
+             },
+             locality:{
+                required:true
+             },
+             town:{
+                required:true
+             },
+             district:{
+                required:true
+             },
+             zip:{
+                required:true,
+                number:true
+             },
+              number:{
+                required:true,
+                number:true
+             },
+              district:{
+                required:true,
+                
+             }    
+			},messages:{
+                
+                    
+               
+                email:{
+                    required:"enter your email address"
+                    },
+                number:{
+                    required:"enter your phone number",
+                    number:"enter a valid phone number"},
+                add1:"enter your address",
+                locality:"enter your locality",
+                town:"enter your town",
+                district:"enter your district",
+                zip:{
+                    required:"enter your pincode",
+                    number:"enter a valid pincode"}
+            }
+		})
+
+		})
+</script>
+
+{{!-- <script type="text/javascript">
+     window.onload = function () {
+        OpenBootstrapPopup();
+    };
+    function OpenBootstrapPopup() {
+        $("#exampleModal").modal('show');
+    }
+</script> --}}
+
+<script>
+    let coupon_price=''
+    function use_coupon(){
+        //take percentage from db
+
+        let coupon_id=document.getElementById('cupid').value
+          let percentage
+          let price = document.getElementById('price').value
+          console.log(price)
+          let end_price 
+          let discount
+        console.log('-----------------------------')
+                axios({
+							method: "post",
+							url: "/use_coupon",
+							data:{coupon_id:coupon_id
+                            }
+							
+							})
+							.then(function (response) {
+								//handle success
+                                console.log(response.data.status.status)
+                                console.log(response.data.status.discount)
+                             $('#exampleModal').modal('hide');
+                                 
+                                  if(response.data.status.status){
+                                    setTimeout(function(){
+                                         swal({ 																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																						
+								text: "Already used once",
+								icon: "warning",
+								 timer: 2000,
+								 buttons: false
+								});
+                                    },500)
+                                    
+                                  }else{
+                                    setTimeout(function(){
+                                        percentage=response.data.status.discount
+                                        discount=percentage*price/100
+                                        end_price=  parseInt(price-discount) 
+                                       coupon_price=price-end_price
+                                      
+                                        document.getElementById('use').innerHTML='₹'+end_price
+                                        document.getElementById('total').value=end_price
+                                        document.getElementById('coupon_activate').innerHTML='Coupon activated.Now you save'+' '+response.data.status.discount+'% Off on this product.You have won discount of ₹'+coupon_price
+
+                                        swal({
+                                        text: "Coupon used",
+                                        icon: "success",
+                                        timer: 2000,
+                                        buttons: false
+                                        });
+                                    },500)
+                                
+                                  }
+                                
+							})
+							.catch(function (response) { 
+								//handle error
+								console.log(response);
+							});
+            
+    }
+
+function select_add(id){
+
+        axios({
+                method: "post",
+                url: "/get_address_to_checkout/"+id,
+                
+                
+                }).then((response)=>{
+                    console.log(response)
+                    console.log(response.data.set_add.name)
+                    $('#addressModalCenter').modal('hide');
+                    document.getElementById('add1').value=response.data.set_add.add1
+                    document.getElementById('add2').value=response.data.set_add.locality
+                    document.getElementById('city').value=response.data.set_add.town
+                    document.getElementById('district').value=response.data.set_add.district
+                    document.getElementById('zip').value=response.data.set_add.pincode
+                }).catch((response)=>{
+                     console.log(response)
+                })
+
+}
+function coupon(id) {
+      
+            /* Select text area by id*/
+            var Text = document.getElementById(id);
+  
+            /* Select the text inside text area. */
+            Text.select();
+  
+            /* Copy selected text into clipboard */
+            navigator.clipboard.writeText(Text.value);
+  
+            /* Set the copied text as text for 
+            div with id clipboard */
+            
+        }
+
+        window.addEventListener("load", () => {
+
+      
+
+                    const form = document.querySelector("form");
+                    form.addEventListener("submit", (e) => {
+                    e.preventDefault();
+                    let data = new FormData(form);
+                    console.log(data);
+               let user_id=document.getElementById('product_id').value
+        let add1=document.getElementById('add1').value
+        let locality=document.getElementById('add2').value
+        let town=document.getElementById('city').value
+        let district = document.getElementById('district').value
+        let pincode = document.getElementById('zip').value
+        let total=document.getElementById('total').value
+        let status=document.getElementById('status').value
+        let fname=document.getElementById('first').value
+        let lname=document.getElementById('last').value
+        let email=document.getElementById('email').value
+        let number=document.getElementById('number').value
+        let coupon_id=document.getElementById('couponid').value
+        let method = document.querySelector('input[name="method"]:checked').value;
+        console.log('hre')
+        if(fname!='' && method!='' && number!=''&& email!='' && lname!='' && status!='' && total!='' && pincode!='' && district!='' && town!='' && locality!='' && add1!=''){
+
+        
+
+                    console.log(method)
+                    console.log(coupon_id)
+                    axios({
+                        method:'post',
+                        url:'/checkout/'+user_id,
+                        data:{
+                            user_id:user_id,
+                            fname:fname,
+                            lname:lname,
+                            email:email,
+                            number:number,
+                            total:total,
+                            add1:add1,
+                            locality:locality,
+                            town:town,
+                            district:district,
+                            zip:pincode,
+                            saved_price:coupon_price,
+                            status:status,
+                            method:method,
+                            coupon_id:coupon_id
+                        }
+                    }).then((response)=>{
+                        if(response.data.codsuccess){
+                            console.log(response)
+                            location.href='/success'
+                        }else{
+                            razorpayPayment(response)
+                        }
+                        
+                       
+                        
+                    }).catch((response)=>{
+                        console.log('catch')
+                        console.log(response)
+                    })
+                    }
+                });
+
+               
+            });
+    function razorpayPayment(order){
+     console.log(order.data.response.amount)
+     var options = {
+    "key": "rzp_test_KQe6dfb0emexIF", // Enter the Key ID generated from the Dashboard
+    "amount": order.data.response.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    "currency": "INR",
+    "name": "Bliss",
+    "description": "Test Transaction",
+    "image": "https://example.com/your_logo",
+    "order_id": order.data.response.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    "handler":function(response){
+        
+        verifypayment(response,order)
+    },
+    "prefill": {
+        "name": "Gaurav Kumar",
+        "email": "gaurav.kumar@example.com",
+        "contact": "9999999999"
+    },
+    "notes": {
+        "address": "Razorpay Corporate Office"
+    },
+    "theme": {
+        "color": "#3399cc"
+    }
+};
+var rzp1 = new Razorpay(options);
+rzp1.open();
+    }
+    function verifypayment(payment,order){
+        console.log('verify-------')
+        axios({
+            url:'/verify_payment',
+            method:'post',
+            data:{
+                payment,order,cart:'delete'
+            }
+        }).then((response)=>{
+            location.href='/success'
+        }).catch(()=>{
+
+        })
+    }
+    
+
+</script>
+
+
+ {{!-- ''&& method!='' && number!=''&& email!='' && lname!='' && status!='' && total!='' && pincode!='' && district!='' && town!='' && locality!='' && add1!='' --}}
+ {{!-- alert(response.razorpay_payment_id);
+        alert(response.razorpay_order_id);
+        alert(response.razorpay_signature); --}}

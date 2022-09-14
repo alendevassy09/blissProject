@@ -1,0 +1,134 @@
+
+<div class="container-fluid">
+    <div class="row">
+        {{!-- <div class="col-12 mt-2">
+            <a href="/admin/add_products" role="button" class="btn btn-success">add product</a>
+        </div> --}}
+        <div class="col-12 mt-2 table-responsive">
+            <table class="table table-striped shadow p-3 mb-5 bg-body rounded " id="product_table">
+            <thead>
+                <tr>
+                
+                <th scope="col">Date</th>
+                <th scope="col">User</th>
+                {{!-- <th scope="col">Email</th> --}}
+                <th scope="col">Phone</th>
+                <th scope="col">Address</th>
+               
+                <th scope="col">Amount</th>
+                <th scope="col">Payment</th>
+                <th scope="col">Status</th>
+                <th scope="col">Method</th>
+                <th scope="col">List</th>
+                <th scope="col">Update</th>
+                <th scope="col">cancel</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                {{#each orders}}
+                <tr>
+                
+                <td>{{format this.createdAt}}</td>
+                <td>{{this.fname}} {{this.lname}}</td>
+                {{!-- <td>{{this.email}}</td> --}}
+                <td>{{this.number}}</td>
+                <td> <small>{{this.add1}}</small>,<small> {{this.locality}}</small>,<br><small> {{this.town}}</small>,<small>{{this.district}}</small>,<small>{{this.zip}}</small></td>
+                
+                
+                <td>₹ {{this.total}}</td>
+                <td> {{this.payment}}</td>
+                {{#if (eq this.status 'pending')}}
+                <td style="color: blue;">{{this.status}}</td>
+                {{else}}
+                    {{#if (eq this.status 'shipped')}}
+                    <td style="color: green;">{{this.status}}</td>
+                    {{/if}}
+                    {{#if (eq this.status 'delivered')}}
+                    <td style="color: orange;">{{this.status}}</td>
+                    {{/if}}
+                    {{#if (eq this.status 'canceled')}}
+                    <td style="color: red;">{{this.status}}</td>
+                    {{/if }}
+                {{/if}}
+                     <td>
+                     {{this.method}}
+                </td>
+                 <td>
+                     <a href="/admin/view_order_products/{{this._id}}" class="text-decoration-none"><i class="bi bi-arrow-up-right-circle-fill"></i></a>
+                </td>
+                 <td>
+                {{#if (eq this.status 'pending')}}
+                    <a href="/admin/ship/{{this._id}}"  class="btn btn-outline-dark"><i class="bi bi-truck"></i></a>
+                {{/if}}
+                {{#if (eq this.status 'shipped')}}
+                    <a href="/admin/delivered/{{this._id}}"  class="btn btn-outline-dark"><i class="bi bi-bag-check-fill"></i></a>
+                {{/if}}
+                {{#if (eq this.status 'delivered')}}
+                    <a  class="btn bg-light"><i class="bi bi-check2-all"></i></a>
+                {{/if}}
+                    
+                </td>
+                <td>
+                 
+                  {{#if (or (eq this.status 'pending')(eq this.status 'shipped'))}}
+                  <button onclick="cancel_order('{{this._id}}')" class="btn btn-danger">cancel</button>
+                    {{/if}}
+                  
+                </td>
+                </tr>
+
+                
+               {{/each}}
+          
+            </tbody>
+            
+            
+            </table>
+        </div>
+    </div>
+</div>
+  <script>
+      $(document).ready( function () {
+        $('#product_table').DataTable({
+            "ordering": false
+        });
+    } );
+
+function cancel_for_admin(id){
+            axios({
+                        method:'get',
+                            url:'/cancel_order/'+id
+                        }).then((response)=>{
+                            console.log(response)
+                            setTimeout(()=>{
+                                location.reload()
+                            },900)
+                            
+                        }).catch((response)=>{
+                            console.log(response)
+                        })
+            
+        }
+        function cancel_order(id){
+                swal({
+                title: "Are you sure?",
+                text: "Once canceled, you will not be able to recover this order!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                })
+                .then((willDelete) => {
+                if (willDelete) {
+                    this.cancel_for_admin(id);
+                    swal(" Your order has been canceled!", {
+                    icon: "success",
+                    buttons:false
+                    });
+                } else {
+                    swal("Your order is safe!");
+                }
+                });
+        }
+
+</script>

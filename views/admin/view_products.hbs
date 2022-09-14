@@ -1,0 +1,75 @@
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 mt-2">
+            <a href="/admin/add_products" role="button" class="btn btn-success">add product</a>
+        </div>
+        <div class="col-12 mt-2">
+            <table class="table table-striped shadow p-3 mb-5 bg-body rounded" id="product_table">
+            <thead>
+                <tr>
+                
+                <th scope="col">product name</th>
+                <th scope="col">price</th>
+                <th scope="col">offer price</th>
+                <th scope="col">size</th>
+                <th scope="col">colors</th>
+                <th scope="col">stock</th>
+                <th scope="col">category</th>
+                <th scope="col">photo</th>
+                <th scope="col">action</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                {{#each products_from_db}}
+                <tr>
+                
+                <td>{{this.product_name}}</td>
+                <td>{{this.price}}</td>
+                <td>{{this.offerprice}}</td>
+                <td>{{#each this.size}} <small>{{this}}</small> {{/each}}</td>
+                <td>{{#each this.color}} <small>{{this}}</small> {{/each}}</td>
+                <td>{{this.stock}}</td>
+                <td>{{category.category}}</td>
+                <td style="width: 6%;"><img width="70%" class="img-fluid" src="/{{this.pic.[0]}}"  alt=""></td>
+                <td>
+                    <a href="/admin/edit/{{this._id}}" class="btn btn-info" role="button"><i class="bi bi-pencil-fill"></i></a>
+                    {{!-- <a href="/admin/delete/{{this._id}}" class="btn btn-danger" role="button">delete</a> --}}
+                    <a type="button"  class="btn btn-danger"  data-bs-toggle="modal" data-bs-target="#staticBackdrop{{this._id}}"><i class="bi bi-trash3-fill"></i></a>
+                </td>
+                </tr>
+
+                <div class="modal fade" id="staticBackdrop{{this._id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">confirm</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    please confirm you action
+                  </div>
+                  <div class="modal-footer">
+                    <a type="button" href="/admin/users" class="btn btn-secondary" data-bs-dismiss="modal">no</a>
+                    
+                    <a  role="button" href="/admin/delete/{{this._id}}" class="btn btn-primary">yes</a>
+                  
+                  </div>
+                </div>
+              </div>
+            </div>
+               {{/each}}
+          
+            </tbody>
+            
+            
+            </table>
+        </div>
+    </div>
+</div>
+  <script>
+      $(document).ready( function () {
+        $('#product_table').DataTable();
+    } );
+</script>

@@ -1,0 +1,318 @@
+
+{{!-- <div id="preloader" class="spinner-border text-warning" role="status">
+  <span id="status" class="sr-only">Loading...</span>
+</div> --}}
+<div id="preloader">
+  <div id="status">&nbsp;</div>
+</div>
+{{!-- <div id="preloader" class="spinner-grow text-primary" role="status">
+  <span id="status" class="sr-only">Loading...</span>
+</div> --}}
+<section class="cart_area mt-5">
+
+        <div class="container">
+            <div class="cart_inner">
+                <div class="table-responsive">
+                    <div class="w-100 text-center">
+                        {{#if empty}}
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-4 ">
+                                    <img class="w-50" src="images/cart.png" alt="">
+                            </div>
+                            </div>
+                        </div>
+                        {{/if}}
+                        {{#if empty}}
+                        <h3 class="mx-auto">Your Cart Is Empty</h3>
+                        {{/if}}
+                    </div>
+               {{#unless empty}}
+                    <table class="table">
+                        
+                        <thead>
+                            <tr>
+                                <th scope="col">Product</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Price</th>
+
+                                {{!-- <th scope="col">size</th>
+                                <th scope="col">color</th> --}}
+                                <th scope="col">Quantity</th>
+                                <th scope="col">offer</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <input type="text" hidden id="id" value="{{products.user_id}}">
+                            
+                            {{#each products.carts}}
+                            <tr>
+                                <td class="w-25">
+                                    <div class="media">
+                                        <div class="">
+                                            <img class="w-25" src="/{{this.product.pic.[0]}}" alt="">
+                                        </div>
+                                        {{!-- <div class="media-body">
+                                            <p>{{this.product.product_name}}</p>
+                                             <h5>{{this.size}}</h5>
+                                             <h5>{{this.color}}</h5>
+                                        </div> --}}
+                                    </div>
+                                </td>
+                                <td>
+                                    <p>{{this.product.product_name}}</p>
+                                             <h5>{{this.size}}</h5>
+                                             <h5>{{this.color}}</h5>
+                                </td>
+                                <td>
+                                    <h5>₹{{this.product.price}}</h5>
+                                </td>
+                                 {{!-- <td>
+                                    <h5>rs{{this.size}}</h5>
+                                </td>
+                                 <td>
+                                    <h5>{{this.color}}</h5>
+                                </td> --}}
+                                <td>
+                                    {{!-- <h5>qty:{{this.quantity}}</h5>
+                                    <div class="btn">btn</div> --}}
+                                    
+                                    <div class="product_count">
+                                        
+                                        <input type="text"  name="qty" disabled id="sst" maxlength="12" min='1' value="{{this.quantity}}" title="Quantity:"
+                                            class="input-text qty">
+                                           
+                                        <button  onclick="fun('{{this.product._id}}','{{products._id}}')"
+                                            class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
+                                             {{#if (gt this.quantity 1)}}
+                                        <button onclick="fundec('{{this.product._id}}','{{products._id}}')"
+                                            class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
+                                            {{/if}}
+                                         
+                                    </div>
+                                </td>
+                                <td>
+                                    <h5>₹{{this.product.offerprice}}</h5>
+                                </td>
+                                <td>
+                                   <a onclick="cart_remove('{{this.product._id}}'); return false;"   class="genric-btn danger-border circle">Remove</a>
+                                </td>
+                            </tr>
+                             
+                            {{/each}}
+                            
+                            
+                            <tr>
+                                <td>
+    
+                                </td>
+                                <td>
+                                    
+                                </td>
+                                <td>
+                                    
+                                </td>
+                                <td>
+                                 
+                                </td>
+                                <td class="d-flex">
+                                    <h5>total:</h5><h5>₹{{products.totalprice}}</h5>
+                                </td>
+                            </tr>
+                            <tr class="out_button_area">
+                                <td>
+
+                                </td>
+                                <td>
+                                     
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+                                   
+                                </td>
+                                <td>
+                                     {{#unless empty}}
+                                    <div class="checkout_btn_inner d-flex align-items-center ">
+                                        <a class="gray_btn" href="/">go to shop</a>
+                                        {{!-- <a class="primary-btn" href="/checkout/{{products.user_id}}">checkout</a> --}}
+                                        <a class="primary-btn" href="/checkout">checkout</a>
+                                    </div>
+                                        {{/unless}}
+                                    
+                                </td>
+                               
+                            </tr>
+                                 <tr class="bottom_button">
+                                <td>
+                                    {{!-- <a class="gray_btn" href="#">Update Cart</a> --}}
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+
+                                </td>
+                                 <td>
+
+                                </td>
+                                <td>
+                                    {{!-- <div class="cupon_text d-flex align-items-center">
+                                        <input type="text" placeholder="Coupon Code">
+                                        <a class="primary-btn" href="#">Apply</a>
+                                        
+                                    </div> --}}
+                                    
+                                </td>
+                            </tr>
+                            
+                            
+                           
+                            
+                        </tbody>
+                    </table>
+                    {{/unless}}
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Cart Area =================-->
+
+    
+   
+    <script>
+         $(window).on('load', function() { // makes sure the whole site is loaded 
+        $('#status').fadeOut(); // will first fade out the loading animation 
+        $('#preloader').delay(5).fadeOut(10); // will fade out the white DIV that covers the website. 
+        $('body').delay(5).css({'overflow':'visible'});
+        })
+                function fun(product,user){
+            var id = document.getElementById('id').value
+            
+            
+                axios({
+							method: "post",
+							url: "/cart",
+							data:{product_id:product,
+                            user_id:id}
+							
+							})
+							.then(function (response) {
+								//handle success
+                               // $( "#sst" ).load(window.location.href + " #sst" );
+                                
+								location.reload()
+							})
+							.catch(function (response) { 
+								//handle error
+								console.log(response);
+							});
+            
+                    	
+        }
+   
+   function fundec(product,user){
+     var id = document.getElementById('id').value
+     var value= document.getElementById('sst').value
+   
+                            axios({
+							method: "post",
+							url: "/cart_dec",
+							data:{product_id:product,
+                            user_id:id}
+							
+							})
+							.then(function (response) {
+								//handle success
+								location.reload()
+							})
+							.catch(function (response) { 
+								//handle error
+								console.log(response);
+							});
+     
+                    	
+        }
+        
+   function cancel(product){
+console.log('------------cart remove-----------------')
+            
+            
+                axios({
+							method: "post",
+							url: "/remove_from_cart",
+							data:{product_id:product}
+						
+							})
+							.then(function (response) {
+								//handle success
+                                setTimeout(()=>{
+                                    location.reload()
+                                },800)
+								
+							})
+							.catch(function (response) { 
+								//handle error
+								console.log(response);
+							});
+            
+        }
+        function cart_remove(id){
+                swal({
+                title: "Are you sure?",
+                text: "Once removed, you will not be able to recover this product!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                })
+                .then((willDelete) => {
+                if (willDelete) {
+                    this.cancel(id);
+                    swal(" Product has been removed!", {
+                    icon: "success",
+                    buttons:false
+                    });
+                } else {
+                    swal("Your product is safe!");
+                }
+                });
+        }
+	</script>
+    
+    <style>
+        body {
+  overflow: hidden;
+}
+
+
+/* Preloader */
+
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgb(255, 255, 255);
+  /* change if the mask should have another color then white */
+  z-index: 99;
+  /* makes sure it stays on top */
+}
+
+#status {
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  left: 50%;
+  /* centers the loading animation horizontally one the screen */
+  top: 50%;
+  /* centers the loading animation vertically one the screen */
+  /* path to your loading animation */
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: -100px 0 0 -100px;
+  /* is width and height divided by two */
+}
+    </style>

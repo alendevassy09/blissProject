@@ -1,0 +1,214 @@
+<div class="container-fluid" onload="get()">
+  <section>
+    <div class="row">
+      <div class="col-12 mt-3 mb-1">
+        <h5 class="text-uppercase"> Dashboard </h5>
+        
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xl-3 col-sm-6 col-12 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between px-md-1">
+              <div class="align-self-center">
+                <i class="fas fa-pencil-alt text-info fa-3x"></i>
+              </div>
+              <div class="text-end">
+                <h3>{{statitics.total_users}}</h3>
+                <p class="mb-0">Users</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-sm-6 col-12 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between px-md-1">
+              <div class="align-self-center">
+                <i class="far fa-comment-alt text-warning fa-3x"></i>
+              </div>
+              <div class="text-end">
+                <h3>₹{{statitics.income}}</h3>
+                <p class="mb-0">income</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-sm-6 col-12 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between px-md-1">
+              <div class="align-self-center">
+                <i class="fas fa-chart-line text-success fa-3x"></i>
+              </div>
+              <div class="text-end">
+                <h3>{{statitics.total_order}}</h3>
+                <p class="mb-0">Total Orders</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-sm-6 col-12 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between px-md-1">
+              <div class="align-self-center">
+                <i class="fas fa-map-marker-alt text-danger fa-3x"></i>
+              </div>
+              <div class="text-end">
+                <h3>{{statitics.online}}</h3>
+                <p class="mb-0">Failed Orders</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xl-3 col-sm-6 col-12 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between px-md-1">
+              <div>
+                <h3 class="text-danger">{{statitics.canceled_order}}</h3>
+                <p class="mb-0">Canceled Orders</p>
+              </div>
+              <div class="align-self-center">
+                <i class="fas fa-rocket text-danger fa-3x"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-sm-6 col-12 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between px-md-1">
+              <div>
+                <h3 class="text-success">{{statitics.delivered_order}}</h3>
+                <p class="mb-0">Delivered Orders</p>
+              </div>
+              <div class="align-self-center">
+                <i class="far fa-user text-success fa-3x"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-sm-6 col-12 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between px-md-1">
+              <div>
+                <h3 class="text-warning">{{statitics.pending_order}}</h3>
+                <p class="mb-0">Pending Orders</p>
+              </div>
+              <div class="align-self-center">
+                <i class="fas fa-chart-pie text-warning fa-3x"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-sm-6 col-12 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between px-md-1">
+              <div>
+                <h3 class="text-info">{{statitics.shipped_order}}</h3>
+                <p class="mb-0">Shipped Orders</p>
+              </div>
+              <div class="align-self-center">
+                <i class="far fa-life-ring text-info fa-3x"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="container">
+  <div class="row w-100 justify-content-center">
+<div class="col-8 mt-5">
+<canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+
+</div>
+<div class="col-4">
+  <canvas id="myChart2" style="width:100%;max-width:600px"></canvas>
+</div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+  window.addEventListener('load', (event) => {
+  
+  axios({
+    url:'/admin/getdash',
+    method:'get'
+
+  }).then((response)=>{
+
+var xValues = ["pending", "delivered", "shipped","canceled"]
+var yValues = [response.data.stat.pending,response.data.stat.delivered,response.data.stat.shipped,response.data.stat.canceled];
+var barColors = [
+  "#b91d47",
+  "#00aba9",
+  "#2b5797",
+  "#e8c3b9",
+  "#1e7145"
+];
+
+new Chart("myChart2", {
+  type: "doughnut",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues
+    }]
+  },
+  options: {
+    title: {
+      display: true,
+      text: "Total Status"
+    }
+  }
+});
+
+var xValues = [response.data.stat.dateArray[0],response.data.stat.dateArray[1],response.data.stat.dateArray[2],response.data.stat.dateArray[3],response.data.stat.dateArray[4],];
+var yValues = [response.data.stat.dateSale[0],response.data.stat.dateSale[1],response.data.stat.dateSale[2],response.data.stat.dateSale[3],response.data.stat.dateSale[4]];
+var barColors = ["red", "green","blue","orange","brown"];
+
+new Chart("myChart", {
+  type: "bar",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues
+    }]
+  },
+  options: {
+    legend: {display: false},
+    title: {
+      display: true,
+      text: "Total Orders In Last 5 Days"
+    }
+  }
+});
+
+    console.log(response)
+  }).catch(()=>{
+
+  })
+
+});
+</script>
+

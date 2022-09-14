@@ -1,0 +1,143 @@
+<div class="product_image_area mt-4">
+		<div class="container">
+			{{!-- action="/add_to_cart/{{product._id}}" --}}
+			
+			<div class="row s_product_inner">
+				<div class="col-lg-5">
+					<div class="s_Product_carousel">
+                        {{#each product.pic}}
+						<div class="single-prd-item">
+							<img class="img-fluid" src="/{{this}}" alt="">
+						</div>
+                        {{/each}}
+					</div>
+				</div>
+				<div class="col-lg-5 offset-lg-1">
+					<div class="s_product_text">
+						<h3>{{product.product_name}}</h3>
+						<h2>₹ {{product.offerprice}}</h2>
+                        <s>₹ {{product.price}}</s>
+
+						<ul class="list">
+							<li><a class="active" href="#"><span>Category</span> : {{product.category.category}}</a></li>
+							<li><a href="#"><span>Availibility</span> : In Stock {{product.stock}}</a></li>
+						</ul>
+						<p>{{product.description}}</p>
+					             
+						<div class="product_count">
+							<label for="qty">Quantity:</label>
+							<input type="text" name="qty" id="sst" min="1" maxlength="12" value="1" title="Quantity:" class="input-text qty">
+							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+							 class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
+							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 1 ) result.value--;return false;"
+							 class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
+						</div>
+							
+								<div>
+									<label for="">select size</label>
+									<div class="product_count d-flex">
+								<div class="btn-group btn-group-toggle" data-toggle="buttons">
+									<select name="size" id="size">
+
+										{{#each product.size}} 
+										<option value="{{this}}">{{this}}</option>
+										
+										{{/each}}
+									</select>
+									
+										</div>
+									</div>  
+								</div>
+							
+							
+								<label for="">select color</label>
+							<div class="product_count d-flex">
+								
+									<select name="color" id="color">
+
+										{{#each product.color}}
+										<option value="{{this}}">{{this}}</option>
+										
+										{{/each}}
+									</select>
+
+
+								{{!-- {{#each product.color}}
+								<label style="color:{{this}};" for="">{{this}}</label>
+								<input name="color" value="{{this}}" id="radio{{this}}"   style="accent-color:{{this}}; "  type="radio">
+										
+								{{/each}} --}}
+							</div>  
+							
+													 {{!-- href="/add_to_cart/{{product._id}}" --}}
+                        
+						<div class="card_area d-flex align-items-center">
+							{{!-- onclick="add-to-cart('{{this._id}}')" --}}
+							<button style="border: none;" onclick="buynow('{{product._id}}')" class="primary-btn" ><a href="" style="color: white;">Buy Now</a> </button>
+							<button style="border: none;" onclick="cart('{{product._id}}')" class="primary-btn" >Add to Cart</button>
+							{{!-- <a class="icon_btn" href="#"><i class="lnr lnr lnr-diamond"></i></a> --}}
+							{{!-- <a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a> --}}
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	<script>
+		
+		function cart(proId){
+			let color= document.getElementById('color').value   
+      		let size= document.getElementById('size').value  
+			let qty= document.getElementById('sst').value  
+        				console.log(qty)
+						axios({
+							method: "post",
+							url: "/add-to-cart",
+							data:{color:color,
+							size:size,
+							quantity:qty,
+							product_id:proId},
+							
+							})
+							.then(function (response) {
+								swal({ 																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																						
+								text: "product added to cart successfully ",
+								icon: "success",
+								});
+								//handle success
+								//console.log(response);
+								
+							})
+							.catch(function (response) {
+								//handle error
+								console.log(response);
+							});
+		}
+		function buynow(proId){
+			let color= document.getElementById('color').value   
+      		let size= document.getElementById('size').value  
+			let qty= document.getElementById('sst').value  
+        				console.log(qty)
+						axios({
+							method: "post",
+							url: "/buynow",
+							data:{color:color,
+							size:size,
+							quantity:qty,
+							product_id:proId},
+							
+							})
+							.then(function (response) {
+								console.log(response)
+								location.href='/single_checkout',true;
+								//handle success
+								//console.log(response);
+								
+							})
+							.catch(function (response) {
+								//handle error
+								console.log(response);
+							});
+		}
+	</script>

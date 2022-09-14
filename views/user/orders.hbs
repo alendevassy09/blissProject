@@ -1,0 +1,238 @@
+<section class="cart_area mt-5">
+        <div class="container">
+            <div class="cart_inner">
+                <div class="table-responsive">
+                    <div class="w-100 text-center">
+                         {{#if empty}}
+                    <div class="container mt-3">
+                        <div class="row justify-content-center">
+                            <div class="col-4">
+                                <img class="w-50" src="images/order.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {{/if}}
+                        {{#if empty}}
+                        <h2  class="mx-auto">You Have No Orders</h2>
+                        {{/if}}
+                    </div>
+                   
+               {{#unless empty}}
+                    <table class="table" >
+                        
+                        <thead>
+                            <tr>
+                                <th scope="col">Date</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">Method</th>
+                                <th scope="col">status</th>
+                                <th style="text-align: center;" scope="col">coupon</th>
+                                {{!-- <th scope="col">size</th>
+                                <th scope="col">color</th> --}}
+                                <th scope="col">Print</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Products</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{!-- <input type="text" hidden id="id" value="{{products.user_id}}"> --}}
+                            
+                            {{#each products}}
+                            
+                            
+                            <tr>
+                                <td>
+                                    <h5>
+                                        {{format this.createdAt}}
+                                    </h5>
+                                             
+                                             
+                                </td>
+                                
+                                <td>
+                                    <h5>{{this.add1}},{{this.locality}},<br>{{this.town}},{{this.district}},{{this.zip}}</h5>
+                                   
+
+                                </td>
+            
+                           
+                                 <td>
+                                    <h5>{{this.method}}</h5>
+                                </td>
+                                  <td>
+                                    {{#if (eq this.status 'pending')}}
+                                    <h5 style="color: blue;">{{this.status}}</h5>
+                                    {{/if}}
+                                    
+                                    {{#if (eq this.status 'shipped')}}
+                                    <h5 style="color:green;">{{this.status}}</h5>
+                                    {{/if}}
+                                    {{#if (eq this.status 'delivered')}}
+                                        <h5 style="color:orange;">{{this.status}}</h5>
+                                    {{/if }}
+                                    {{#if (eq this.status 'canceled')}}
+                                        <h5 style="color:red;">{{this.status}}</h5>
+                                    {{/if }}
+                                </td>
+                                <td>
+                                   {{#if this.coupon_name}}
+                                   <h5>{{this.coupon_name}} {{this.coupon_discount}}%off</h5>
+                                   <h5>Saved ₹{{this.saved_price}}</h5>
+                                   {{else}}
+                                   <h5>Not Applied</h5>
+                                   {{/if}}
+                                </td>
+                                <td>
+                                    <button class="btn" id="button_pdf"  onclick="pdf('{{this._id}}')"><span class="material-symbols-outlined">
+description
+</span></button>
+                                    
+                                    <div class="modal fade" id="exampleModal{{this._id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div  class="modal-body" id="makepdf{{this._id}}">
+                                            <h5>
+                                                Order placed on : {{format this.createdAt}}
+                                            </h5>
+                                            <hr>
+                                            <h5>To : {{this.add1}},{{this.locality}},<br>{{this.town}},{{this.district}},{{this.zip}}
+                                            <hr>
+                                            {{#if this.coupon_name}}
+                                            <h5>{{this.coupon_name}} {{this.coupon_discount}}%off</h5>
+                                            <h5>Saved ₹{{this.saved_price}}</h5>
+                                            <hr>
+                                            {{else}}
+                                            <h5>Coupon : Not Applied</h5>
+                                            <hr>
+                                            {{/if}}
+                                            
+                                            <div class="d-flex">
+                                             {{#each this.products}}
+                                             
+                                            {{!-- <img class="w-25 mb-1" src="files/admin-pic-1661939867184.jpeg" alt=""> --}}
+                                            <h5>Name : {{this.product.product_name}}</h5>
+                                            <h5>Qty : {{this.quantity}}</h5>
+                                            <h5>Color : {{this.color}}</h5>
+                                            <h5>size : {{this.size}}</h5>
+                                            {{/each}}
+                                            </div>
+                                           <hr>
+                                           <h5>Total Amount : ₹{{this.total}}</h5>
+                                            <hr>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <h5>₹ {{this.total}}</h5>
+                                </td>
+                              
+                                <td>
+                                    <h5><a class="nav-link" href="/orders_view/{{this._id}}"><span class="material-symbols-outlined">
+                                    read_more
+                                    </span></i></a> </h5>
+                                                                        
+                                </td>
+                                 <td>
+                                    {{#if (or (eq this.status 'pending')(eq this.status 'shipped'))}}
+                                    <button onclick="cancel_order('{{this._id}}')" class="btn btn-danger">cancel</button>
+                                    {{/if}}
+                                </td>
+                                
+                               
+                            </tr>
+                          
+                         
+                           
+                            
+                             
+                            {{/each}}
+                            
+                            
+                           
+                            {{!-- <img class="w-25 mb-1" src="files/admin-pic-1661939867184.jpeg" alt=""> --}}
+                        </tbody>
+                    </table>
+                    {{/unless}}
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+           
+
+                        
+                            
+        function cancel(id){
+            axios({
+                        method:'get',
+                            url:'/cancel_order/'+id
+                        }).then((response)=>{
+                            console.log(response)
+                            setTimeout(()=>{
+                                location.reload()
+                            },900)
+                            
+                        }).catch((response)=>{
+                            console.log(response)
+                        })
+            
+        }
+        function cancel_order(id){
+                swal({
+                title: "Are you sure?",
+                text: "Once canceled, you will not be able to recover this order!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                })
+                .then((willDelete) => {
+                if (willDelete) {
+                    this.cancel(id);
+                    swal(" Your order has been canceled!", {
+                    icon: "success",
+                    buttons:false
+                    });
+                } else {
+                    swal("Your order is safe!");
+                }
+                });
+        }
+
+    </script>
+    
+    <!--================End Cart Area =================-->
+
+    
+    <script>
+	var button = document.getElementById("button_pdf");
+	
+
+async	function pdf(id) {
+        var makepdf = document.getElementById("makepdf"+id);
+		var mywindow = window.open("", "PRINT",
+				"height=400,width=600");
+
+	mywindow.document.write(makepdf.innerHTML);
+		mywindow.document.close();
+		mywindow.focus();
+ 
+		mywindow.print();
+		mywindow.close();
+
+		return true;
+	}
+</script>

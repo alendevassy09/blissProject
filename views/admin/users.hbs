@@ -1,0 +1,79 @@
+<div class="container mt-3">
+  <div class="row">
+    <div class="col">
+
+      <table class="table table-striped shadow" id="usertable">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">E-mail</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Status</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+          <tbody>
+            {{#each userData}}
+            <tr>
+              <td>{{this.fname}} {{this.lname}}</td>
+              <td>{{this.email}}</td>
+              <td>{{this.phone}}</td>
+              {{#if this.isblocked}}
+              <td style="color: red;">blocked</td>
+              {{else}}
+              <td style="color: green;">active</td>
+              {{/if}}
+              {{#if this.isblocked}}
+              <td style="width: 14%;;">
+                {{!-- onclick="return confirm('are you sure you want to activate this user')" --}}
+                {{!-- <a class="btn btn-success" href="/admin/activate/{{this._id}}" >activate</a> --}}
+                <a style="width: 60%;" type="button"  class="btn btn-success"  data-bs-toggle="modal" data-bs-target="#staticBackdrop{{this._id}}">unblock</a>
+
+              </td >
+                {{else}} 
+                <td style="width: 14%;">
+                {{!-- <a class="btn btn-danger" href="/admin/block/{{this._id}}" onclick="return confirm('are you sure you want to block this user')">block</a> --}}
+                <a style="width: 60%;" type="button"  class="btn btn-danger"  data-bs-toggle="modal" data-bs-target="#staticBackdrop{{this._id}}">block</a>
+
+                </td>
+                {{/if}}
+            </tr>
+              <div class="modal fade" id="staticBackdrop{{this._id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">confirm</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    please confirm you action
+                  </div>
+                  <div class="modal-footer">
+                    <a type="button" href="/admin/users" class="btn btn-secondary" data-bs-dismiss="modal">no</a>
+                    {{#if this.isblocked}}
+                    <a  role="button" href="/admin/activate/{{this._id}}" class="btn btn-primary">yes</a>
+                    {{else}}
+                    <a  role="button" href="/admin/block/{{this._id}}" class="btn btn-primary">yes</a>
+                    {{/if}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+        
+          
+      <script>
+      $(document).ready( function () {
+        $('#usertable').DataTable();
+    } );
+   </script>
+
+
+
+      

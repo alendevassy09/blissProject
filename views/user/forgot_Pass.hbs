@@ -1,0 +1,44 @@
+<div class="container-fluid bg-light" style="height: 100%;">
+    <div class="row h-100">
+        <div class="col-3 mx-auto my-auto">
+             <form action="/forgot_email" method="post" id="adminloginform">
+                     
+                <div class="form-group ">
+                   
+                    <label for="exampleInputEmail1">Enter your registered Email address</label>
+                    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                    
+                </div>
+                <div class="form-group form-check">
+                   {{#if forgot_Password_Check}}
+                    <small  style="color: red;">this email is not registered</small>
+                    {{/if}}
+                    {{#if wrong_otp_for_forgot_password}}
+                    <small  style="color: red;">you entered the wrong otp</small>
+                    {{/if}}
+
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+
+        </div>
+    </div>
+</div>
+<script>
+$(document).ready(function(){
+  		$("#adminloginform").validate({
+    rules:{
+
+		email: { 
+			required: true,
+			 email: true 
+			 },
+          password:{
+			required: true,
+            minlength:3,
+            maxlength:6
+          },   
+			}
+		})
+		})
+</script>

@@ -1,0 +1,196 @@
+
+<div class="container" onload="fun()">
+    <div class="row justify-content-center">
+        <div class="col-12 mt-2">
+            {{!-- <a role="button" href="/admin/add_category" class="btn btn-success">add category</a> --}}
+            <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">add category</a>
+                    {{!-- add category modal --}}
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    
+                    <form action="/admin/add_category" method="post" id="formid">
+                         <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">enter category name</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        
+                        <div class="modal-body">
+                            <input
+                                    
+                                    type="text"
+                                    name="category"
+                                    class="form-control w-75 "
+                                    id="exampleInputEmail1"
+                                    aria-describedby="emailHelp"
+                                    placeholder="category"
+                                />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" href="" class="btn btn-primary">Save changes</button>
+                        </div>
+                        </div>
+                    </div>
+                    </form>
+
+                   
+                </div>
+
+
+                    
+        </div>
+        <div class="col-12 col-md-10 mt-2">
+            <table class="table table-striped shadow p-3 mb-5 bg-body rounded" id="product_table"> 
+            <thead>
+                <tr>
+                
+                <th scope="col">category name</th>
+                
+                <th scope="col">action</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                {{#each categories}}
+                <tr>
+                
+                <td>{{this.category}}</td>
+                <td>
+                                   <!-- Button trigger modal -->
+                    <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{this._id}}">
+                    <i class="bi bi-pencil-fill"></i>
+                    </a>
+                    {{!-- <a href="/admin/edit_category_name/{{this._id}}" class="btn btn-info" role="button">edit</a> --}}
+                    {{!-- <a href="/admin/delete/{{this._id}}" class="btn btn-danger" role="button">delete</a> --}}
+                    
+                    <a style="width: %;" type="button"  class="btn btn-danger "  data-bs-toggle="modal" data-bs-target="#staticBackdrop{{this._id}}"><i class="bi bi-trash3-fill"></i></a>
+                </td>
+                </tr>
+
+
+
+{{!-- category edit modal --}}
+
+
+<!-- Modal -->
+                    <div class="modal fade" id="exampleModal{{this._id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    
+                    <form action="/admin/edit_category_name/{{this._id}}" method="post" id="formid2">
+                         <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">edit category name</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        
+                        <div class="modal-body">
+                            <input
+                                    value="{{this.category}}"
+                                    type="text"
+                                    required
+                                    name="category"
+                                    class="form-control w-75 "
+                                    id="exampleInputEmail1"
+                                    aria-describedby="emailHelp"
+                                    placeholder="category"
+                                />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" href="" class="btn btn-primary">Save changes</button>
+                        </div>
+                        </div>
+                    </div>
+                    </form>
+
+                   
+                    </div>
+{{!-- category delete modal --}}
+                <div class="modal fade" id="staticBackdrop{{this._id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">confirm</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    are you sure about deleting {{this.category}}
+                  </div>
+                  <div class="modal-footer">
+                    <a type="button" href="/admin/categories" class="btn btn-secondary" data-bs-dismiss="modal">no</a>
+                    
+                    <a  role="button" href="/admin/delete_category/{{this._id}}" class="btn btn-primary">yes</a>
+                  
+                  </div>
+                </div>
+              </div>
+            </div>
+            <script>
+  $(document).ready(function(){ $("#formid2").validate(
+    { rules:
+            { 
+                category: {
+                required: true,
+                 }
+            } 
+            })
+             })
+</script>
+
+
+          
+               
+
+               {{/each}}
+          
+            </tbody>
+            
+            
+            </table>
+        </div>
+    </div>
+</div>
+  <script>
+      $(document).ready( function () {
+        $('#product_table').DataTable();
+    } );
+</script>
+<script>
+  $(document).ready(function(){ $("#formid").validate(
+    { rules:
+            { 
+                category: {
+                required: true,
+                 }
+            } 
+            })
+             })
+</script>
+{{#if catExist}}
+<script>
+  onload=function(){
+      swal({
+								
+			text: "this category is being used by products",
+			icon: "warning",
+			});
+  }
+ 	
+
+</script>
+{{/if}}
+
+{{#if duplicate}}
+<script>
+  onload=function(){
+      swal({
+								
+			text: "already exists",
+			icon: "warning",
+			});
+  }
+ 	
+
+</script>
+{{/if}}

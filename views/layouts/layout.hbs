@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+	
+ <!-- ================================================= -->
+	<!-- Mobile Specific Meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Favicon-->
+	<link rel="shortcut icon" href="/img/fav.png">
+	<!-- Author Meta -->
+	<meta name="author" content="CodePixar">
+	<!-- Meta Description -->
+	<meta name="description" content="">
+	<!-- Meta Keyword -->
+	<meta name="keywords" content="">
+	<!-- meta character set -->
+	<meta charset="UTF-8">
+	<!-- Site Title -->
+	<title>bliss</title>
+
+	
+
+	<!--
+		CSS
+		============================================= -->
+	<link rel="stylesheet" href="/css/linearicons.css">
+	<link rel="stylesheet" href="/css/owl.carousel.css">
+	<link rel="stylesheet" href="/css/themify-icons.css">
+	<link rel="stylesheet" href="/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/css/nice-select.css">
+	<link rel="stylesheet" href="/css/nouislider.min.css">
+	<link rel="stylesheet" href="/css/bootstrap.css">
+	<link rel="stylesheet" href="/css/main.css">
+
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+{{!-- success cdn --}}
+ <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,400i,700,900&display=swap" rel="stylesheet">
+
+
+
+  <!-- ================================================= -->
+  </head>
+  <body>
+	
+		<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+	{{#if user}}
+    {{>user_Header}}
+	{{else admin}}
+	{{>admin_Header}}
+	{{/if}}
+    {{{body}}}
+    <!-- ================================================= bootstrap for dashboard --> 
+	
+    	<script src="/js/vendor/jquery-2.2.4.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+	 crossorigin="anonymous"></script>
+	<script src="/js/vendor/bootstrap.min.js"></script>
+	<script src="/js/jquery.ajaxchimp.min.js"></script>
+	<script src="/js/jquery.nice-select.min.js"></script>
+	<script src="/js/jquery.sticky.js"></script>
+	<script src="/js/nouislider.min.js"></script>
+	<script src="/js/jquery.magnific-popup.min.js"></script>
+	<script src="/js/owl.carousel.min.js"></script>
+	<!--gmaps Js-->
+	{{!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
+	<script src="js/gmaps.min.js"></script> --}}
+	<script src="/js/main.js"></script>
+
+		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/additional-methods.min.js"></script>
+
+{{!-- razor added --}}
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+{{!-- html to pdf --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+	<script>
+
+ var maincount
+ var cartcount
+document.addEventListener('DOMContentLoaded',funon);
+		function funon(){
+			console.log('sdsdsdsdsdsdsd')
+		axios({
+							url: "/count",
+							method: "get"
+							})
+							.then(function (response) {
+								//handle success
+								document.getElementById('wishcount').innerHTML=response.data.status.num
+								document.getElementById('cartcount').innerHTML=response.data.status.cart
+								console.log(response.data.status.num)
+								console.log(response.data.status.cart)
+								maincount=response.data.status.num
+								cartcount=response.data.status.cart
+							})
+							.catch(function (response) { 
+								//handle error
+								console.log(response);
+							});
+            
+		}
+
+
+		var count=document.getElementById('wishcount').innerHTML
+
+		function wishlist(product){
+            
+            
+            console.log('-----------------------------')
+                axios({
+							method: "post",
+							url: "/wishlist",
+							data:{product_id:product}
+							
+							})
+							.then(function (response) {
+								//handle success
+								console.log(count)
+								console.log(response.data.status)
+								if(response.data.status){
+									document.getElementById('wishcount').innerHTML=1+maincount++
+									swal({ 																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																						
+								text: "added to wishlist ",
+								icon: "success",
+								 timer: 1000,
+								 buttons: false
+								});
+								}else if(response.data.status==false){
+									swal({ 																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																						
+								text: "already in wishlist",
+								icon: "success",
+								 timer: 1000,
+								 buttons: false
+								});
+								}else if(typeof(response.data.status)=='undefined'){
+									swal({ 																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																						
+								text: "please login",
+								icon: "warning",
+								 timer: 1000,
+								 buttons: false
+								});
+								}
+
+
+								
+								
+							})
+							.catch(function (response) { 
+								//handle error
+								console.log(response);
+							});
+            
+                    	
+        }
+
+	function addtocart(proId){
+			let color= document.getElementById('color').value   
+      		let size= document.getElementById('size').value  
+			let qty= document.getElementById('sst').value  
+        				console.log(qty)
+						axios({
+							method: "post",
+							url: "/add-to-cart",
+							data:{color:color,
+							size:size,
+							quantity:qty,
+							product_id:proId},
+							
+							})
+							.then(function (response) {
+								console.log(response.data.status)
+								if(response.data.status){
+									document.getElementById('cartcount').innerHTML=1+cartcount++
+
+									swal({ 																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																						
+								text: "added to cart",
+								icon: "success",
+								 timer: 1000,
+								 buttons: false
+								});
+								}else if(response.data.status==false){
+									swal({ 																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																						
+								text: "already in cart",
+								icon: "success",
+								 timer: 1000,
+								 buttons: false
+								});
+								}else if(typeof(response.data.status)=='undefined'){
+									swal({ 																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																						
+								text: "please login",
+								icon: "warning",
+								 timer: 1000,
+								 buttons: false
+								});
+								}
+								
+								//handle success
+								//console.log(response);
+								
+							})
+							.catch(function (response) {
+								//handle error
+								console.log(response);
+							});
+		}
+
+function addtocartwish(proId){
+			let color= document.getElementById('color').value   
+      		let size= document.getElementById('size').value  
+			let qty= document.getElementById('sst').value  
+        				console.log(qty)
+						axios({
+							method: "post",
+							url: "/add-to-cart",
+							data:{color:color,
+							size:size,
+							quantity:qty,
+							product_id:proId},
+							
+							})
+							.then(function (response) {
+								swal({ 																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																						
+								text: "added to cart wish",
+								icon: "success",
+								 timer: 1000,
+								 buttons: false
+								});
+								//handle success
+								//console.log(response);
+								
+							})
+							.catch(function (response) {
+								//handle error
+								console.log(response);
+							});
+		}
+        
+        function cancelwish(product){
+            
+            
+            console.log('-----------------------------')
+                axios({
+							method: "post",
+							url: "/wishlist_remove",
+							data:{product_id:product}
+							
+							})
+							.then(function (response) {
+								//handle success
+								setTimeout(()=>{
+									location.reload()
+								},800)
+								
+							})
+							.catch(function (response) { 
+								//handle error
+								console.log(response);
+							});
+            
+        }
+		 
+        function  wishlist_remove(id){
+                swal({
+                title: "Are you sure?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                })
+                .then((willDelete) => {
+                if (willDelete) {
+                    this.cancelwish(id);
+                    swal("removed from wishlist", {
+                    icon: "success",
+                    buttons:false
+                    });
+                }
+                });
+        }
+
+</script>
+
+{{!-- function fun(product,user){
+            var id = document.getElementById('id').value
+            
+            
+                axios({
+							method: "post",
+							url: "/cart",
+							data:{product_id:product,
+                            user_id:id}
+							
+							})
+							.then(function (response) {
+								//handle success
+								location.reload()
+							})
+							.catch(function (response) { 
+								//handle error
+								console.log(response);
+							});
+            
+                    	
+        }
+   
+   function fundec(product,user){
+     var id = document.getElementById('id').value
+     var value= document.getElementById('sst').value
+   
+                            axios({
+							method: "post",
+							url: "/cart_dec",
+							data:{product_id:product,
+                            user_id:id}
+							
+							})
+							.then(function (response) {
+								//handle success
+								location.reload()
+							})
+							.catch(function (response) { 
+								//handle error
+								console.log(response);
+							});
+     
+                    	
+        }
+        
+   --}}
+		
+	
+  </body>
+</html>
+
+{{!-- method: "post",
+							url: "/remove_from_cart",
+							data:{product_id:product}
+							 --}}

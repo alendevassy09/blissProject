@@ -1,0 +1,89 @@
+	<div id="preloader">
+  <div id="status">&nbsp;</div>
+</div>
+<section>
+			<div class="container mt-5">
+                <div class="row justify-content-center">
+					<div class="col-lg-6 text-center">
+						<div class="section-title">
+							{{!-- <h1>{{category_name.[0].category.category}}</h1> --}}
+							
+						</div>
+					</div>
+				</div>
+				<div class="row justify-content-center mt-5">
+					<div class="col-lg-6 text-center">
+						<div class="section-title">
+							{{#unless more}}
+							<h1>{{category_name.[0].category.category}}</h1>
+							{{/unless}}
+							{{#if more}}
+							<h1>New Collection</h1>
+							{{/if}}
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<!-- single product -->
+					{{#each category_name}}
+						<div class="col-lg-3 col-md-6 shadow-sm p-3 mb-5 bg-white rounded hover mx-1">
+							<a href="/single_product_details/{{this._id}}">
+						<div class="single-product">
+							
+							<img class="img-fluid " src="/{{this.pic.[0]}}" alt="">
+							<div class="product-details">
+								{{!-- <h6>{{this.product_name}} </h6> --}}
+								<div class="price">
+									
+									<h6>{{this.product_name}} </h6>
+									<div>
+										<h6>rs{{this.offerprice}}</h6>
+									<h6 class="l-through">rs {{this.price}}</h6>
+									</div>
+									
+						<div class="product_count" hidden>
+							<label for="qty">Quantity:</label>
+							<input type="text" name="qty" id="sst" min="1" maxlength="12" value="1" title="Quantity:" class="input-text qty">
+							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+							 class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
+							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 1 ) result.value--;return false;"
+							 class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
+						</div>
+							
+								</div>
+								<div class="prd-bottom position-absolute">
+
+									<a  onclick="addtocart('{{this._id}}');  return false;"  class="social-info">
+										<span class="ti-bag"></span>
+										<p class="hover-text">add to bag</p>
+									</a>
+									<a  onclick="wishlist('{{this._id}}');  return false;" class="social-info">
+										<span class="lnr lnr-heart"></span>
+										<p class="hover-text">Wishlist</p>
+									</a>
+								</div>
+							</div>
+						</div>
+						</a>
+					</div>
+					<input type="text"  id="color" hidden value="{{this.color.[0]}}">
+					<input type="text"  id="size" hidden value="{{this.size.[0]}}">
+					{{/each}}
+				</div>
+			</div>
+		</section>
+	
+	<script>
+		  $(window).on('load', function() { // makes sure the whole site is loaded 
+        $('#status').fadeOut(); // will first fade out the loading animation 
+        $('#preloader').delay(5).fadeOut(50); // will fade out the white DIV that covers the website. 
+        $('body').delay(5).css({'overflow':'visible'});
+        })
+	</script>
+		<style>
+								.hover:hover{
+									transition: 300ms;
+									transform: scale(1.02);
+								}
+							</style>
+		

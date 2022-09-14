@@ -1,0 +1,248 @@
+
+<div class="container-fluid mt-5" style="height: 100%;">
+  {{!-- <div class="row h-100"> --}}
+    {{!-- <div class="col-3 mx-auto my-auto"> --}}
+  <form action="/admin/edit_product/{{product._id}}" method="post" id="formid" enctype="multipart/form-data">
+      
+      <div class="row h-100  justify-content-center">
+        <div class="d-md-flex  w-50">
+
+
+   
+                    <div class="me-1 col-12 col-md-6">
+
+
+   
+                        <div class="form-group">
+
+                          <label for="exampleInputEmail1">enter product name</label>
+                          <input
+                            type="text"
+                          
+                            value="{{product.product_name}}"
+                            name="product_name"
+                            class="form-control"
+                            id="exampleInputEmail1"
+                            aria-describedby="emailHelp"
+                            placeholder="product name"
+                          />
+
+                        </div>
+                        
+                        <div class="form-group">
+                          <label for="exampleInputPrice1"> price</label>
+                          <input
+                          value="{{product.price}}"
+                            type="text"
+                            name="price"
+                            class="form-control"
+                            id="exampleInputPrice1"
+                            placeholder="Price"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputPrice1"> offer price</label>
+                          <input
+                            type="text"
+                            value="{{product.offerprice}}"
+                            name="offerprice"
+                            class="form-control"
+                            id="exampleInputofferPrice1"
+                            placeholder="offerPrice"
+                          />
+                        </div>
+                      
+        
+           
+                        <div class="form-group">
+                          <label for="exampleInputstock">stock</label>
+                          <input
+                            min="0"
+                            value="{{product.stock}}"
+                            type="number"
+                            name="stock"
+                            class="form-control"
+                            id="exampleInputstock"
+                            placeholder="stock"
+                          />
+                        </div>
+
+                        <div class="form-group">
+
+                        <label for="exampleInputEmail1">enter product description</label>
+                        {{!-- <input
+                          type="text",
+                          
+                          name="description"
+                          class="form-control"
+                          id="exampleInputEmail1"
+                          aria-describedby="emailHelp"
+                          placeholder="description"
+                        /> --}}
+                        <textarea name="description"  class="form-control" id="" cols="30" rows="3"></textarea>
+
+                      </div>
+        
+        
+                    </div>
+                    <div class="ms-1 col-12 col-md-6">
+                    <div class="form-group ">
+                      <label for="exampleInputActualprice">select category</label>
+                     <select name="category"   class="form-control">
+                            <option value="{{product.category._id}}" selected hidden disabled>{{product.category.category}}</option>
+                            {{#each category_list}}
+                            <option value="{{this._id}}">{{this.category}}</option>
+                            {{/each}}
+                            </select>
+                            {{!-- <select name="category" style="color: black;" class="form-control">
+                            <option value="" disabled selected hidden >click here to choose</option>
+                            {{#each categories}}
+                            <option value="{{this._id}}">{{this.category}}</option>          
+                            {{/each}}
+                            </select> --}}
+                    </div>
+                  <div class="form-group mt-md-3">
+                    <label for="exampleInputActualprice"><u>select available sizes</u></label>
+                        <div >
+                            <input class="form-check-input" name="size" type="checkbox" value="small" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                              small 
+                            </label>
+                            <input class="form-check-input" checked name="size" type="checkbox" value="medium" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                              medium 
+                            </label>
+                            <input class="form-check-input" name="size" type="checkbox" value="large" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                              large
+                            </label>
+
+
+
+                        </div>
+                  </div>
+                  
+
+                  <div class="form-group mt-md-3">
+                    <label for="exampleInputActualprice"><u> select available colors</u></label>
+                    {{!-- <input class="form-check-input" name="color" checked hidden type="checkbox" value="white" id="flexCheckDefault"> --}}
+                      <div >
+                        <input class="form-check-input" style="background-color: rgb(250, 140, 140);" name="color" type="checkbox" value="red" id="flexCheckDefault">
+                        <input class="form-check-input" style="background-color: rgb(237, 247, 107);" name="color" type="checkbox" value="yellow" id="flexCheckDefault">
+                        <input class="form-check-input" style="background-color: rgb(127, 250, 133);" name="color" type="checkbox" value="green" id="flexCheckDefault">
+                        <input class="form-check-input" style="background-color: rgb(49, 36, 36);" name="color" type="checkbox" value="black" id="flexCheckDefault">
+                        <input class="form-check-input" style="background-color: rgb(72, 75, 252);" name="color" type="checkbox" value="blue" id="flexCheckDefault">
+                      </div>
+                    <input class="form-check-input" name="color" hidden type="checkbox" value="plain" id="flexCheckDefault">
+                </div>
+            
+                    <div class="form-group mt-md-3 " >
+                      <label for="exampleInputimages">select images</label>
+                      <input type="file" multiple name="pic"  class="form-control-file" id="pic">
+                    </div>
+                    <div id="preview"></div>
+                      {{!-- <div >
+                          <button type="submit" class="mt-3 btn btn-success ms-auto w-100">submit</button>
+                      </div> --}}
+                  
+        </div>
+      
+        
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-2">
+          <button type="submit" class="mt-3 btn btn-success ms-auto w-100">submit</button>
+        </div>
+      </div>
+  </form>
+
+    {{!-- </div> --}}
+  {{!-- </div> --}}
+  </div>
+    
+</div>
+<script>
+  $(document).ready(function(){ $("#formid").validate(
+    { rules:
+     { product_name: {
+
+  required: true,
+    },
+    price:{
+      required:true,
+      number:true
+    },
+    stock:{
+      required:true
+    },
+    description:{
+      required:true
+    },
+    offerprice:{
+      required:true,
+      number:true
+    },
+    category:{
+      required:true
+    },
+    color:{
+      required:true
+    },
+    shape:{
+      required:true
+    },
+    size:{
+      required:true
+    },
+    pic:{
+      required:true,
+      extension: "png|jpe?g|gif",
+    }
+    
+   }
+  
+    })
+     })
+
+     
+function previewImages() {
+
+  var preview = document.querySelector('#preview');
+  
+  if (this.files) {
+    [].forEach.call(this.files, readAndPreview);
+  }
+
+  function readAndPreview(file) {
+
+    // Make sure `file.name` matches our extensions criteria
+    if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
+      return alert(file.name + " is not an image");
+    } // else...
+    
+    var reader = new FileReader();
+    
+    reader.addEventListener("load", function() {
+      var image = new Image();
+      image.height = 100;
+      image.title  = file.name;
+      image.src    = this.result;
+      preview.appendChild(image);
+    });
+    
+    reader.readAsDataURL(file);
+    
+  }
+
+}
+
+document.querySelector('#pic').addEventListener("change", previewImages);
+
+
+</script>
+</script>
+<style>
+  .error{
+    color: red;
+  }
+</style>

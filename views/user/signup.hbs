@@ -1,0 +1,162 @@
+
+
+	<!--================Login Box Area =================-->
+	<section class="login_box_area section_gap ">
+		<div class="container pt-3">
+			<div class="row justify-content-center">
+			
+				
+				<div class="col-lg-6">
+				
+					<div class="login_form_inner">
+						
+						<form class="row login_form" action="/send_otp" method="post" id="contactForm" >
+							<div class="col-md-12 form-group">
+								<div class="creat_account">
+									{{#if userExist}}
+									<label style="color: red;" for="f-option2">email id already exists</label>
+									{{/if}}							
+								</div>
+							</div>
+							<div class="col-md-12 form-group">
+								
+								<input value="{{exist.fname}}" type="text" class="form-control" id="fname" name="fname" placeholder="First name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'">
+							</div>
+							<div class="col-md-12 form-group">
+								
+								<input value="{{exist.lname}}" type="text" class="form-control" id="lname" name="lname" placeholder="Last name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'">
+							</div>
+                            	<div class="col-md-12 form-group">
+								<input type="email" class="form-control" id="email" name="email" placeholder="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'email'">
+							    </div>
+                                <div class="col-md-12 form-group">
+								<input value="{{exist.phone}}" type="tel" class="form-control" id="phone" name="phone" placeholder="phone" onfocus="this.placeholder = ''" onblur="this.placeholder = 'phone'">
+								<input value="false" type="text" hidden class="form-control" id="isblocked" name="isblocked" placeholder="phone" onfocus="this.placeholder = ''" onblur="this.placeholder = 'phone'">
+
+							    </div>
+							<div class="col-md-12 form-group">
+								<input value="{{exist.password}}" type="password" class=" inp1 form-control" id="password" name="password" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'">
+							</div>
+                            <div class="col-md-12 form-group">
+								<input value="{{exist.confirmpassword}}" type="password" class="form-control" id="confirmpassword" name="confirmpassword" placeholder="confirm Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'confirm Password'">
+							</div>
+							
+							<div class="col-md-12 form-group">
+								<button type="submit"  class="primary-btn">sign up</button>
+								{{!-- <a href="#">Forgot Password?</a> --}}
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script>
+    $(document).ready(function(){
+		  jQuery.validator.addMethod("noSpace", function(value, element) { 
+  return value.indexOf(" ") < 0 && value != ""; 
+}, "No space please");
+  		$("#contactForm").validate({
+    rules:{
+
+
+		fname:{
+			required:true,
+			
+			noSpace: true
+			
+		},
+		lname:{
+			required:true,
+			
+			noSpace: true
+			
+		},		
+		email: { 
+			required: true,
+			 email: true 
+			 },
+			 phone:{
+				 required: true,
+				number: true,
+				minlength: 10,
+				maxlength: 10
+			 },
+          password:{
+			required: true,
+            minlength:3,
+            maxlength:6
+          },
+          confirmpassword:{
+			required: true,
+            equalTo:"#password"
+          }   
+			},
+			messages:{
+				fname:{
+					required:'enter your first name'
+				},
+				lname:{
+					required:'enter your last name'
+				},
+				email:{
+					required:'enter your email address'
+				},
+				password:{
+					required:'enter password'
+				},
+				confirmpassword:{
+					required:'repeat password'
+				}
+
+			}
+		})
+		})
+</script>
+
+{{!-- <script>
+	const name=document.getElementById('name')
+	const email=document.getElementById('email')
+	const password=document.getElementById('password')
+	const confirm=document.getElementById('confirmpassword')
+	 const form = document.getElementById('contactForm')
+	const errorElement=document.getElementById('nameerror') 	 
+		 console.log('qdqadqwdqwd')
+		form.addEventListener('submit', (event) => {
+			let messages=[]
+			if(name.value === " " || name.value==null){
+				messages.push('name is required')
+			}
+			if(messages.length>0){
+
+				
+				//errorElement.innerHTML=messages.join(', ')
+			}
+			event.preventDefault()
+		
+		console.log('We are never getting here unless your click a submit button in the form')
+		})
+</script>
+
+ --}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

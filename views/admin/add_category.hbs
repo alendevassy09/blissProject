@@ -1,0 +1,39 @@
+<div class="container-fluid pt-5" style="height: 100%;">
+  <div class="row h-100 mt-5" style="height: 100%;">
+    <div class="col-8 col-md-3 mx-auto my-50">
+      <form action="/admin/add_category" method="post" id="adminloginform" class="pt-5 ">
+
+            <label for="exampleInputEmail1">enter the category name</label>
+        <div class="form-group d-flex justify-content-between mt-3">
+
+          
+          <input
+            type="text"
+            name="category"
+            class="form-control w-75 "
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            placeholder="category"
+          />
+           <div>
+             <button type="submit" class="btn btn-success ">add </button>
+             </div>
+
+        </div>
+        <div class="form-group form-check">
+          {{#if exist}}
+            <small style="color: red;">this category alreay exists</small>
+          {{/if}}
+        </div >
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>
+<script>
+  $(document).ready(function(){ $("#adminloginform").validate({ rules:{ email: {
+  required: true, email: true }, password:{ required: true, minlength:3,
+  maxlength:6 }, } }) })
+</script>

@@ -1,0 +1,358 @@
+<div id="preloader">
+  <div id="status">&nbsp;</div>
+</div>
+	<!-- start banner Area -->
+	<section class="banner-area">
+		<div class="container" onload="fun()">
+			<div class="row fullscreen align-items-center justify-content-start">
+				<div class="col-lg-12">
+					<div class="active-banner-slider owl-carousel">
+						<!-- single-slide -->
+						{{#each banner}}
+						<div class="row single-slide align-items-center d-flex ">
+							<div class="col-lg-5 col-md-6">
+								<div class="banner-content">
+									<h2>{{this.title}}</h2>
+									<p>{{this.description}}</p>
+									<div class="add-bag d-flex align-items-center">
+										<a class="add-btn" href="/view_more"><span class="lnr lnr-cross"></span></a>
+										<span class="add-text text-uppercase">View More</span>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-7">
+								<div class="banner-img " >
+									<img class="img-fluid" src="/{{this.pic}}" alt="">
+									
+									{{!-- img/banner/banner-img.png --}}
+								</div>
+							</div>
+						</div>
+						{{/each}}
+						<!-- single-slide -->
+						<div class="row single-slide align-items-center d-flex ">
+							{{!-- <div class="col-lg-5">
+								<div class="banner-content mt-4">
+									<h1>bliss New <br>Collection!</h1>
+									<p>Discover a wide range of Very Versace styles, from prescription reading glasses to sun-ready shades in square, round, and rectangular frames. Look no further for a sophisticated selection of sunglasses and optical glasses.</p>
+									<div class="add-bag d-flex align-items-center">
+										<a class="add-btn" href=""><span class="lnr lnr-cross"></span></a>
+										<span class="add-text text-uppercase">Add to Bag</span>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-7">
+								<div class="banner-img">
+									<img class="img-fluid" src="images/pexels-felipe-ferreira-701877_prev_ui.png" alt="">
+								</div>
+							</div> --}}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End banner Area -->
+
+	<!-- start features Area -->
+	<section class="features-area section_gap">
+		<div class="container">
+			<div class="row features-inner">
+				<!-- single features -->
+				<div class="col-lg-3 col-md-6 col-sm-6">
+					<div class="single-features">
+						<div class="f-icon">
+							<img src="img/features/f-icon1.png" alt="">
+						</div>
+						<h6>Free Delivery</h6>
+					
+					</div>
+				</div>
+				<!-- single features -->
+				<div class="col-lg-3 col-md-6 col-sm-6">
+					<div class="single-features">
+						<div class="f-icon">
+							<img src="img/features/f-icon2.png" alt="">
+						</div>
+						<h6>Return Policy</h6>
+						
+					</div>
+				</div>
+				<!-- single features -->
+				<div class="col-lg-3 col-md-6 col-sm-6">
+					<div class="single-features">
+						<div class="f-icon">
+							<img src="img/features/f-icon3.png" alt="">
+						</div>
+						<h6>24/7 Support</h6>
+						
+					</div>
+				</div>
+				<!-- single features -->
+				<div class="col-lg-3 col-md-6 col-sm-6">
+					<div class="single-features">
+						<div class="f-icon">
+							<img src="img/features/f-icon4.png" alt="">
+						</div>
+						<h6>Secure Payment</h6>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- end features Area -->
+
+	<!-- Start category Area -->
+	{{!-- <section class="category-area">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-8 col-md-12">
+					<div class="row">
+						<div class="col-lg-8 col-md-8">
+							<div class="single-deal">
+								<div class="overlay"></div>
+								<img class="img-fluid w-100" src="img/category/c1.jpg" alt="">
+								<a href="img/category/c1.jpg" class="img-pop-up" target="_blank">
+									<div class="deal-details">
+										<h6 class="deal-title">Sneaker for Sports</h6>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-4">
+							<div class="single-deal">
+								<div class="overlay"></div>
+								<img class="img-fluid w-100" src="img/category/c2.jpg" alt="">
+								<a href="img/category/c2.jpg" class="img-pop-up" target="_blank">
+									<div class="deal-details">
+										<h6 class="deal-title">Sneaker for Sports</h6>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-4">
+							<div class="single-deal">
+								<div class="overlay"></div>
+								<img class="img-fluid w-100" src="img/category/c3.jpg" alt="">
+								<a href="img/category/c3.jpg" class="img-pop-up" target="_blank">
+									<div class="deal-details">
+										<h6 class="deal-title">Product for Couple</h6>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="col-lg-8 col-md-8">
+							<div class="single-deal">
+								<div class="overlay"></div>
+								<img class="img-fluid w-100" src="img/category/c4.jpg" alt="">
+								<a href="img/category/c4.jpg" class="img-pop-up" target="_blank">
+									<div class="deal-details">
+										<h6 class="deal-title">Sneaker for Sports</h6>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="single-deal">
+						<div class="overlay"></div>
+						<img class="img-fluid w-100" src="img/category/c5.jpg" alt="">
+						<a href="img/category/c5.jpg" class="img-pop-up" target="_blank">
+							<div class="deal-details">
+								<h6 class="deal-title">Sneaker for Sports</h6>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section> --}}
+	<!-- End category Area -->
+
+		<section>
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-lg-6 text-center">
+						<div class="section-title">
+							<h1>Latest Products</h1>
+							
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					
+					<!-- single product -->
+					{{#each products}}
+					
+						<div class="col-lg-3 col-md-4 p-3 shadow mx-1  mb-5 bg-white rounded hover" style="width: 10rem;">
+							<a href="/single_product_details/{{this._id}}">
+						<div class="single-product h-25">
+							<div class="" >
+								<img class="img-fluid"  src="/{{this.pic.[0]}}" alt="">
+							</div>
+							
+							
+							<div class="product-details" >
+								{{!-- <h6>{{this.product_name}} </h6> --}}
+								<div class="price">
+									
+									<h6>{{this.product_name}} </h6>
+									<div>
+										<h6>₹ {{this.offerprice}}</h6>
+									<h6 class="l-through">₹ {{this.price}}</h6>
+									</div>
+									
+						<div class="product_count" hidden>
+							<label for="qty">Quantity:</label>
+							<input type="text" name="qty" id="sst" min="1" maxlength="12" value="1" title="Quantity:" class="input-text qty">
+							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+							 class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
+							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 1 ) result.value--;return false;"
+							 class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
+						</div>
+							
+								</div>
+								<div class="prd-bottom position-absolute">
+
+									<a  onclick="addtocart('{{this._id}}');  return false;"  class="social-info">
+										<span class="ti-bag"></span>
+										<p class="hover-text">add to bag</p>
+									</a>
+									<a  onclick="wishlist('{{this._id}}');  return false;" class="social-info">
+										<span class="lnr lnr-heart"></span>
+										<p class="hover-text">Wishlist</p>
+									</a>
+								</div>
+							</div>
+						</div>
+						</a>
+						<input type="text"  id="color" hidden value="{{this.color.[0]}}">
+					<input type="text"  id="size" hidden value="{{this.size.[0]}}">
+					</div>
+					
+					{{/each}}
+					
+					</div>
+				</div>
+			</div>
+		</section>
+<style>
+								.hover:hover{
+									transition: 300ms;
+									transform: scale(1.02);
+								}
+							</style>
+		
+	<!-- start product Area -->
+	
+	<!-- End related-product Area -->
+
+	<!-- start footer Area -->
+	<footer class="footer-area section_gap">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3  col-md-6 col-sm-6">
+					<div class="single-footer-widget">
+						<h6>About Us</h6>
+						<p>
+						We Provide the best of the best.The meaning of the word Bliss means perfect happiness.As the name suggest.We are the perfect choice for you.
+						</p>
+					</div>
+				</div>
+				<div class="col-lg-4  col-md-6 col-sm-6">
+					<div class="single-footer-widget">
+						<h6>Newsletter</h6>
+						<p>Stay update with our latest</p>
+						<div class="" id="mc_embed_signup">
+
+							<form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
+							 method="get" class="form-inline">
+
+								<div class="d-flex flex-row">
+
+									<input class="form-control" name="EMAIL" placeholder="Enter Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '"
+									 required="" type="email">
+
+
+									<button class="click-btn btn btn-default"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></button>
+									<div style="position: absolute; left: -5000px;">
+										<input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
+									</div>
+
+									<!-- <div class="col-lg-4 col-md-4">
+												<button class="bb-btn btn"><span class="lnr lnr-arrow-right"></span></button>
+											</div>  -->
+								</div>
+								<div class="info"></div>
+							</form>
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-lg-2 col-md-6 col-sm-6">
+					<div class="single-footer-widget">
+						<h6>Follow Us</h6>
+						<p>Let us be social</p>
+						<div class="footer-social d-flex align-items-center">
+							<a href="#"><i class="fa fa-facebook"></i></a>
+							<a href="#"><i class="fa fa-twitter"></i></a>
+							<a href="#"><i class="fa fa-dribbble"></i></a>
+							<a href="#"><i class="fa fa-behance"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
+				<p class="footer-text m-0"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+</p>
+			</div>
+		</div>
+	</footer>
+	<!-- End footer Area -->
+
+	<script>
+		  $(window).on('load', function() { // makes sure the whole site is loaded 
+        $('#status').fadeOut(); // will first fade out the loading animation 
+        $('#preloader').delay(5).fadeOut(50); // will fade out the white DIV that covers the website. 
+        $('body').delay(5).css({'overflow':'visible'});
+        })
+	</script>
+	<style>
+		  body {
+  overflow: hidden;
+}
+
+
+/* Preloader */
+
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgb(255, 255, 255);
+  /* change if the mask should have another color then white */
+  z-index: 99;
+  /* makes sure it stays on top */
+}
+
+#status {
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  left: 50%;
+  /* centers the loading animation horizontally one the screen */
+  top: 50%;
+  /* centers the loading animation vertically one the screen */
+  /* path to your loading animation */
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: -100px 0 0 -100px;
+  /* is width and height divided by two */
+}
+	</style>

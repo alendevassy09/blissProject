@@ -5,6 +5,7 @@ const order= require('../models/order_model')
 const user = require('../models/signup_Model')
 const coupon = require('../models/add_coupon')
 const category=require('../models/add_category')
+const product_qty_dec=require('../models/add_products')
 // const { EsimProfileContext } = require('twilio/lib/rest/supersim/v1/esimProfile')
 // const { category } = require('../middlewares/usermiddle')
 var objectId=require('mongodb').ObjectId
@@ -22,10 +23,11 @@ module.exports={
                coupon_used = await coupon.findOne({couponCode:coupon_code})
                body.coupon_name=coupon_used.coupon
                body.coupon_discount=coupon_used.discount
+               
 
             }
-             
-            console.log(body);
+             console.log('---body');
+            console.log(body.products);
 
 
             const user_cart = await cart.findOne({user_id:objectId(userid)})
@@ -50,9 +52,16 @@ module.exports={
             body.payment='pending'
             if(body.method!='COD'){
               body.online='failed'
+              for(let i=0;i<body.products.length;i++){
+                await product_qty_dec.updateOne({_id:body.products[i].product},{$inc:{stock:-body.products[i].quantity}})
+              }
             }else{
               body.online='',
               await cart.deleteOne({user_id:objectId(userid)})
+              for(let i=0;i<body.products.length;i++){
+                await product_qty_dec.updateOne({_id:body.products[i].product},{$inc:{stock:-body.products[i].quantity}})
+              }
+
             }
             
             await order.create(body).then(async(response)=>{
@@ -87,8 +96,7 @@ module.exports={
             var totalprice=0
             var qty=0
            const orders = await order.find({user_id:objectId(_id),online:{$ne:'failed'}}).populate('products.product').sort({createdAt:-1}).lean()
-           console.log('-------------------------------');
-           console.log(orders);    
+           
        console.log('-------------------------------');
        resolve(orders)
            let total=[]

@@ -50,6 +50,7 @@ module.exports={
             body.products=contents
             body.checkDate=newdate
             body.payment='pending'
+            
             if(body.method!='COD'){
               body.online='failed'
               for(let i=0;i<body.products.length;i++){

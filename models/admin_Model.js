@@ -1,7 +1,8 @@
 const mongoose = require('mongoose')
 
 const doc = new mongoose.Schema({
-    name:'String',
+    fname:'String',
+    lname:'String',
     email:'String',
     phone:'number',
     password:'string',

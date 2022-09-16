@@ -595,6 +595,8 @@ var user_id=req.session.user_id
     var cat_id=req.params.id
     userHelper.findCategory(cat_id).then((category_name)=>{
       res.render('user/category',{login:req.session.login,user:true,category_name,category:req.session.categories_from_database})
+    }).catch((err)=>{
+      next(err)
     })
     
   })

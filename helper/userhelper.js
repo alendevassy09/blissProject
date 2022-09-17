@@ -150,7 +150,7 @@ verification:(body)=>{
               }
                 resolve(response)
             } catch (error) {
-                reject(erro)
+                reject(error)
             }
             
         })

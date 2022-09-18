@@ -26,6 +26,7 @@ module.exports={
     },
     userLoginCheck:(req,res,next)=>{
         if(!req.session.login){
+            console.log('-------not login user');
             res.redirect('/login')
         }else{
             next()
@@ -34,6 +35,8 @@ module.exports={
     },
     userLoginCheck_cart:(req,res,next)=>{
         if(!req.session.login){
+
+            console.log('-------not login');
             res.redirect('/login')
         }else{
             next()

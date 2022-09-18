@@ -44,6 +44,7 @@ router.get("/", usermiddle.isblocked_check,usermiddle.category,function (req, re
 
 router.get("/login", function (req, res, next) {
   if (!req.session.login) {
+    console.log('hre----------------------');
     res.render("user/login", {
       loginError: req.session.loginError,
       user: true,
@@ -214,7 +215,8 @@ router.post('/add-to-cart',usermiddle.userLoginCheck_cart,usermiddle.isblocked_c
   req.body.quantity=parseInt(req.body.quantity)
   cart.add_to_cart(product_id,user_id,req.body).then((status)=>{
     // res.redirect('/single_product_details')
-    res.json({status})
+   
+      res.json({status}) 
     
   }).catch((err)=>{
     next(err)
